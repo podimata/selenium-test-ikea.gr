@@ -6,3 +6,7 @@ class MainPageLocators(object):
     MENU = (By.CSS_SELECTOR, ".burgerBtn")
     MENU_EXISTS = (By.CSS_SELECTOR, "div.burger.open")
     OFFERS = (By.LINK_TEXT, "Προσφορές")
+
+
+
+
