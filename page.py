@@ -1,6 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.keys import Keys
 import time
 from locator import MainPageLocators
 
@@ -49,6 +50,20 @@ class MainPage(BasePage):
     def check_link_prosfores(self):
         return "Προσφορές" in self.driver.title
 
+    def ikea_search(self):
+        search = self.driver.find_element(*MainPageLocators.FILL_FORM)
+        search.clear()
+        search.send_keys("τραπέζι")
+        search.send_keys(Keys.RETURN)
+
+    def search_results_page(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(MainPageLocators.RESULTS)
+            )
+            return True
+        except NoSuchElementException as e:
+            return False
 
 
 
@@ -72,12 +87,6 @@ class MainPage(BasePage):
 
 
 
-
-    # def ikea_search(self):
-    #     search = WebDriverWait(self.driver, 10).until(
-    #          EC.presence_of_element_located((By.XPATH, "//input[@class='searchInput']"))
-    #     )
-    #     search.send_keys("τραπέζι")
 
 
 
