@@ -5,10 +5,12 @@ from selenium.webdriver.common.keys import Keys
 import time
 from locator import MainPageLocators
 
+
 class BasePage(object):
 
     def __init__(self, driver):
         self.driver = driver
+
 
 class MainPage(BasePage):
 
@@ -26,7 +28,6 @@ class MainPage(BasePage):
             return opacity == 1
         except NoSuchElementException as e:
             return False
-
 
     def ikea_menu(self):
         menu = WebDriverWait(self.driver, 10).until(
@@ -47,7 +48,7 @@ class MainPage(BasePage):
         )
         offers.click()
 
-    def check_link_prosfores(self):
+    def check_link_offers(self):
         return "Προσφορές" in self.driver.title
 
     def ikea_search(self):
@@ -55,6 +56,7 @@ class MainPage(BasePage):
         search.clear()
         search.send_keys("τραπέζι")
         search.send_keys(Keys.RETURN)
+        time.sleep(3)
 
     def search_results_page(self):
         try:
@@ -65,7 +67,15 @@ class MainPage(BasePage):
         except NoSuchElementException as e:
             return False
 
-
+    def classification_products(self):
+        product = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable(MainPageLocators.CLASSIFICATION)
+        )
+        product.click()
+        for option in self.driver.find_elements(*MainPageLocators.LIST):
+            if option.text == "Τιμή αύξουσα":
+                option.click()
+                break
 
 
 

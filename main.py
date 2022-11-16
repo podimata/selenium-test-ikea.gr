@@ -4,6 +4,7 @@ import page
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 import time
 
+
 class SearchYoutube(unittest.TestCase):
 
     def setUp(self):
@@ -11,7 +12,6 @@ class SearchYoutube(unittest.TestCase):
         options.add_argument("--headless")
         self.driver = webdriver.Firefox(options=options)
         self.driver.get("https://www.ikea.gr/")
-
 
     def test_ikea_reject_cookies(self):
         main_page = page.MainPage(self.driver)
@@ -32,7 +32,7 @@ class SearchYoutube(unittest.TestCase):
         main_page.ikea_reject_cookies()
         main_page.ikea_menu()
         main_page.ikea_offers()
-        self.assertTrue(main_page.check_link_prosfores())
+        self.assertTrue(main_page.check_link_offers())
 
     def test_ikea_search(self):
         main_page = page.MainPage(self.driver)
@@ -40,6 +40,13 @@ class SearchYoutube(unittest.TestCase):
         main_page.ikea_reject_cookies()
         main_page.ikea_search()
         self.assertTrue(main_page.search_results_page())
+
+    def test_classification_products(self):
+        main_page = page.MainPage(self.driver)
+        time.sleep(1)
+        main_page.ikea_reject_cookies()
+        main_page.ikea_search()
+        main_page.classification_products()
 
     def tearDown(self):
         self.driver.close()
