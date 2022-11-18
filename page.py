@@ -77,8 +77,11 @@ class MainPage(BasePage):
                 option.click()
                 break
 
-
-
+    def choice_table(self):
+        choice_table = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable(MainPageLocators.CHOICE_TABLE)
+        )
+        choice_table.click()
 
 
 

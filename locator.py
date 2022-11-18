@@ -11,4 +11,4 @@ class MainPageLocators(object):
     RESULTS = (By.CSS_SELECTOR, ".mainTitle h1")
     CLASSIFICATION = (By.CSS_SELECTOR, ".filters .cnt .filerWrp .itm.sorting .dd.list-parameter-element i.icon")
     LIST = (By.CSS_SELECTOR, ".ddList ul li")
-
+    CHOICE_TABLE = (By.CSS_SELECTOR, ".product:nth-child(3)")

@@ -9,7 +9,7 @@ class SearchYoutube(unittest.TestCase):
 
     def setUp(self):
         options = FirefoxOptions()
-        options.add_argument("--headless")
+        # options.add_argument("--headless")
         self.driver = webdriver.Firefox(options=options)
         self.driver.get("https://www.ikea.gr/")
 
@@ -47,6 +47,13 @@ class SearchYoutube(unittest.TestCase):
         main_page.ikea_reject_cookies()
         main_page.ikea_search()
         main_page.classification_products()
+
+    def test_product_choice(self):
+        main_page = page.MainPage(self.driver)
+        time.sleep(1)
+        main_page.ikea_reject_cookies()
+        main_page.ikea_search()
+        main_page.choice_table()
 
     def tearDown(self):
         self.driver.close()
